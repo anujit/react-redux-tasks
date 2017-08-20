@@ -14,7 +14,10 @@ const tasks = (state = {
 	  			items : action.items
 	  		});
 	  	case 'DELETE_TASK' : 
-	  		return state.items.slice(0,action.index).concat(state.items.slice(action.index + 1))
+	  		return Object.assign({}, state, {
+	  			isFetching : false,
+	  			items : state.items.slice(0, action.index).concat(state.items.slice(action.index + 1))
+	  		});	  		
 	  	default :
 	  		return state;
 	  }

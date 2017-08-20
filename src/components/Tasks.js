@@ -1,7 +1,7 @@
 import React from 'react'
 import Task from './Task'
 
-const Tasks = ({tasks}) => (
+const Tasks = ({tasks, onDeleteClick}) => (
 
 	<table className="table">
 		<thead className="thead-inverse">
@@ -21,6 +21,7 @@ const Tasks = ({tasks}) => (
 					index={index + 1}
 					taskId={task.id}
 					{...task}
+					onClick = {() => onDeleteClick(index)}
 				/>
 			)}			
 		</tbody>

@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
-import Tasks from '../components/Tasks'
 import {fetchTasks} from '../actions'
+import {TaskList} from './TaskList'
 
 class visibleTaskList extends Component {
 
@@ -19,7 +19,7 @@ class visibleTaskList extends Component {
 				{!isFetching && items.length === 0 && <h2>No Tasks Found</h2>}
 				{items.length > 0 &&
 					<div>
-						<Tasks tasks={items} />
+						<TaskList tasks={items} />
 					</div>
 				}
 			</div>
