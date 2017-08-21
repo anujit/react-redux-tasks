@@ -11,6 +11,12 @@ function requestTasks(){
 	}
 }
 
+function requestCategories(){
+	return {
+		type : 'REQUEST_CATEGORIES'
+	}
+}
+
 function deleteTask(index){
 	return {
 		type : 'DELETE_TASK',
@@ -30,6 +36,13 @@ function receiveTasks(items,itemsDeleted){
 		type : 'RECEIVE_TASKS',
 		items : items,
 		itemsDeleted : itemsDeleted
+	}
+}
+
+function receiveCategories (items){
+	return {
+		type : 'RECEIVE_CATEGORIES',
+		items : items
 	}
 }
 
@@ -53,10 +66,27 @@ function fetchTasks(){
 	}
 }
 
+function fetchCategories(){
+	return function(dispatch){
+
+		dispatch(requestCategories());
+
+		return fetch('http://599560c6b963e100113b6dc0.mockapi.io/categories')
+			.then(
+				response => response.json(),
+				error => console.log('Error in fetching categories - ', error)
+			)
+			.then(items => {
+				dispatch(receiveCategories(items))
+			})
+
+	}
+}
 
 export {
 	setVisibilityFilter, 
 	fetchTasks,
 	deleteTask,
-	toggleTask
+	toggleTask,
+	fetchCategories
 }
