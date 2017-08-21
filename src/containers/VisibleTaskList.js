@@ -26,14 +26,15 @@ class visibleTaskList extends Component {
 
 	render(){
 		const {items, isFetching, visibilityFilter} = this.props
+		const tasks = getVisibleTasks(items,visibilityFilter)
 
 		return (
 			<div>
-				{isFetching && items.length === 0 && <h2>Loading...</h2>}
+				{isFetching && tasks.length === 0 && <h2>Loading...</h2>}
 				{!isFetching && items.length === 0 && <h2>No Tasks Found</h2>}
 				{items.length > 0 &&
 					<div>
-						<TaskList tasks={getVisibleTasks(items,visibilityFilter)} />
+						<TaskList tasks={tasks} />
 					</div>
 				}
 			</div>

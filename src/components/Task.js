@@ -10,7 +10,7 @@ const Task = ({ index, taskId, done, due_date, category, description, onClick, o
 		<td>{due_date}</td>
 		<td className="edit-button" style={{cursor:'pointer'}}>Edit</td>
 		<td className="delete-button" style={{cursor:'pointer'}} onClick={onClick}>Delete</td>
-		<td><input type="checkbox" onChange={onChange} defaultChecked={done} checked={done} /></td>
+		<td><input type="checkbox" onChange={onChange} checked={done} /></td>
 	</tr>
 )
 
