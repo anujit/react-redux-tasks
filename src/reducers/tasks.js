@@ -1,6 +1,7 @@
 const tasks = (state = {
 	isFetching : false,
-	items : []
+	items : [],
+	selectedTask : []
 } , action) => {
 
 	  switch (action.type){
@@ -24,7 +25,9 @@ const tasks = (state = {
 	  			items : state.items.map(item=> 
 	  			(item.id === action.taskId) ? {...item, done : !item.done} : item
 	  		)
-	  		});	  		  		
+	  		});	
+	  	case 'SELECTED_TASK_FOUND' : 			
+			return {...state, selectedTask : action.selectedTask}
 	  	default :
 	  		return state;
 	  }

@@ -1,7 +1,9 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router'
 import {fetchTasks} from '../actions'
 import {TaskList} from './TaskList'
+import FilterLinks from './FilterLinks'
 
 const getVisibleTasks = (items, filter) => {
   switch (filter) {
@@ -30,11 +32,22 @@ class visibleTaskList extends Component {
 
 		return (
 			<div>
-				{isFetching && tasks.length === 0 && <h2>Loading...</h2>}
-				{!isFetching && items.length === 0 && <h2>No Tasks Found</h2>}
+				{isFetching && tasks.length === 0 && <div>Loading...</div>}
+				{!isFetching && items.length === 0 && <div>No Tasks Found</div>}
 				{items.length > 0 &&
 					<div>
+						<div className = "row">
+							<div className="col-md-12">
+								<h2>Tasks App - Tasks List</h2>
+							</div>
+						</div>
+						<FilterLinks />
 						<TaskList tasks={tasks} />
+						<div className="row">
+							<div className="col-md-12">
+								<Link to={{ pathname: '/edit' }}>Create New Task</Link>
+							</div>
+						</div>
 					</div>
 				}
 			</div>

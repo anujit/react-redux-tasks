@@ -42,7 +42,14 @@ function receiveTasks(items,itemsDeleted){
 function receiveCategories (items){
 	return {
 		type : 'RECEIVE_CATEGORIES',
-		items : items
+		items
+	}
+}
+
+function receiveSelectedTask(selectedTask){
+	return {
+		type : 'SELECTED_TASK_FOUND',
+		selectedTask
 	}
 }
 
@@ -63,6 +70,31 @@ function fetchTasks(){
 				dispatch(receiveTasks(items))
 			})
 
+	}
+}
+
+function fetchSelectedTask(taskId){
+	const getSelectedTask = (tasks) => {
+		const selectedTask = tasks.filter(task => task.id === taskId)
+		if(selectedTask.length) return selectedTask
+		else return []
+	}
+
+	return (dispatch, getState) => {
+		const selectedTask = getSelectedTask(getState().tasks.items)
+		if(selectedTask.length) {
+			dispatch(receiveSelectedTask(selectedTask));
+		} else {
+			return fetch('http://599560c6b963e100113b6dc0.mockapi.io/tasks')
+			.then(
+				response => response.json(),
+				error => console.log('Error in fetching tasks - ', error)
+			)
+			.then(items => {
+				const selectedTask = getSelectedTask(items)
+				dispatch(receiveSelectedTask(selectedTask));
+			})
+		}
 	}
 }
 
@@ -88,5 +120,6 @@ export {
 	fetchTasks,
 	deleteTask,
 	toggleTask,
-	fetchCategories
+	fetchCategories,
+	fetchSelectedTask
 }
