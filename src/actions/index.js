@@ -1,7 +1,7 @@
-function setVisibilityFilter(visibilityFilter){
+function setVisibilityFilter(filter){
 	return {
 		type : 'SET_VISIBILITY_FILTER',
-		visibilityFilter
+		filter
 	}
 }
 
@@ -18,6 +18,12 @@ function deleteTask(index){
 	}
 }
 
+function toggleTask(taskId){
+	return {
+		type : 'TOGGLE_TASK',
+		taskId
+	}
+}
 
 function receiveTasks(items,itemsDeleted){
 	return {
@@ -51,5 +57,6 @@ function fetchTasks(){
 export {
 	setVisibilityFilter, 
 	fetchTasks,
-	deleteTask		
+	deleteTask,
+	toggleTask
 }

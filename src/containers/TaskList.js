@@ -1,9 +1,10 @@
 import { connect } from 'react-redux'
-import { deleteTask } from '../actions'
+import { deleteTask, toggleTask } from '../actions'
 import Tasks from '../components/Tasks'
 
 const mapDispatchToProps = {
-  onDeleteClick: deleteTask
+  onDeleteClick: deleteTask,
+  onChange: toggleTask
 }
 
 const TaskList = connect(

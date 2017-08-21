@@ -17,7 +17,14 @@ const tasks = (state = {
 	  		return Object.assign({}, state, {
 	  			isFetching : false,
 	  			items : state.items.slice(0, action.index).concat(state.items.slice(action.index + 1))
-	  		});	  		
+	  		});	  	
+	  	case 'TOGGLE_TASK' :
+	  		return Object.assign({}, state, {
+	  			isFetching : false,
+	  			items : state.items.map(item=> 
+	  			(item.id === action.taskId) ? {...item, done : !item.done} : item
+	  		)
+	  		});	  		  		
 	  	default :
 	  		return state;
 	  }
