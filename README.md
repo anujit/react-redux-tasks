@@ -9,3 +9,13 @@ To run the code -
 ```javascript
 npm start
 ```
+
+### Following features need to be added -
+
+- [] Complete the edit functionality
+- [] Ability to add task date in the task form
+- [] Sortable columns in the tasks table
+- [] Unit testing
+- [] Storybook integration
+- [] UI Enhancement
+- [] Re-check the state shape
