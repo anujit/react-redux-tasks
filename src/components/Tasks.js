@@ -30,7 +30,7 @@ class Tasks extends Component {
 									index={index + 1}
 									taskId={task.id}
 									{...task}
-									onClick = {() => onDeleteClick(index)}
+									onClick = {() => onDeleteClick(task.id)}
 									onChange = {() => onChange(task.id)}
 								/>
 							)}			

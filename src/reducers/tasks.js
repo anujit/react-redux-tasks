@@ -17,7 +17,7 @@ const tasks = (state = {
 	  	case 'DELETE_TASK' : 
 	  		return Object.assign({}, state, {
 	  			isFetching : false,
-	  			items : state.items.slice(0, action.index).concat(state.items.slice(action.index + 1))
+	  			items : state.items.filter(item => item.id !== action.taskId)
 	  		});	  	
 	  	case 'TOGGLE_TASK' :
 	  		return Object.assign({}, state, {

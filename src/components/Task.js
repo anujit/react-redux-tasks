@@ -8,7 +8,7 @@ const Task = ({ index, taskId, done, due_date, category, description, onClick, o
 		</th>
 		<td>{description}</td>
 		<td>{category}</td>
-		<td>{due_date}</td>
+		<td>{new Date(parseInt(due_date)).toLocaleDateString()}</td>
 		<td className="edit-button" style={{cursor:'pointer'}}><Link to={{pathname: '/edit/' + taskId }}>Edit</Link></td>
 		<td className="delete-button" style={{cursor:'pointer'}} onClick={onClick}>Delete</td>
 		<td><input type="checkbox" onChange={onChange} checked={done} /></td>

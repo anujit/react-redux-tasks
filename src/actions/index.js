@@ -17,10 +17,10 @@ function requestCategories(){
 	}
 }
 
-function deleteTask(index){
+function deleteTask(taskId){
 	return {
 		type : 'DELETE_TASK',
-		index
+		taskId
 	}
 }
 
@@ -50,6 +50,13 @@ function receiveSelectedTask(selectedTask){
 	return {
 		type : 'SELECTED_TASK_FOUND',
 		selectedTask
+	}
+}
+
+function inititateDelete(taskId){
+	return {
+		type : 'INITIATE_DELETE_TASK',
+		taskId
 	}
 }
 
@@ -84,6 +91,7 @@ function fetchSelectedTask(taskId){
 		const selectedTask = getSelectedTask(getState().tasks.items)
 		if(selectedTask.length) {
 			dispatch(receiveSelectedTask(selectedTask));
+			return Promise.resolve();			
 		} else {
 			return fetch('http://599560c6b963e100113b6dc0.mockapi.io/tasks')
 			.then(
@@ -98,6 +106,28 @@ function fetchSelectedTask(taskId){
 	}
 }
 
+function deleteSelectedTask(taskId){
+	return function(dispatch){
+
+		dispatch(inititateDelete(taskId));
+
+		return fetch('http://599560c6b963e100113b6dc0.mockapi.io/tasks/'+taskId,
+					{
+						method : 'DELETE'
+					}
+				)
+			.then(
+				response => response.json(),
+				error => console.log('Error in fetching tasks - ', error)
+			)
+			.then(items => {
+				dispatch(deleteTask(taskId))
+			})
+
+	}	
+}
+
+
 function fetchCategories(){
 	return function(dispatch){
 
@@ -111,7 +141,6 @@ function fetchCategories(){
 			.then(items => {
 				dispatch(receiveCategories(items))
 			})
-
 	}
 }
 
@@ -119,7 +148,8 @@ export {
 	setVisibilityFilter, 
 	fetchTasks,
 	deleteTask,
+	deleteSelectedTask,
 	toggleTask,
 	fetchCategories,
-	fetchSelectedTask
+	fetchSelectedTask,
 }
