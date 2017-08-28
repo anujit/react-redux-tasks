@@ -12,7 +12,7 @@ npm start
 
 ### Following features need to be added -
 
-- [] Complete the edit functionality
+- [] Complete the edit functionality - currently encountering a problem where the OPTIONS call is getting canceled
 - [] Ability to add task date in the task form
 - [] Sortable columns in the tasks table
 - [] Unit testing
